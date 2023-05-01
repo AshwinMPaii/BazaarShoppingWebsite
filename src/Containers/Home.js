@@ -1,40 +1,19 @@
 import react from "react";
-import "./header.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import SearchBar from "../Components/searchbar";
 import NavBar from "../Components/navbar";
-import {
-  faTwitter,
-  faFacebook,
-  faInstagram,
-} from "@fortawesome/free-brands-svg-icons";
+import Head from "../Components/head";
+
 
 
 
 function Home(){
     return (
       <>
-        <div className="header1">
-          <div className="left_side">
-            <button className="button1">HOT</button>
-            <h5 className="header-text">Free Express Shipping</h5>
-          </div>
-          <div className="right_side">
-            <a href="https://twitter.com/">
-              <FontAwesomeIcon icon={faTwitter} color="white" />
-            </a>
-            <a href="https://www.facebook.com/">
-              <FontAwesomeIcon icon={faFacebook} color="white" />
-            </a>
-            <a href="https://www.instagram.com/">
-              <FontAwesomeIcon icon={faInstagram} color="white" />
-            </a>
-          </div>
+        <div className="1st container">
+          <Head/>
         </div>
         <div className="container2">
-          <SearchBar/>
-          
+          <SearchBar/>  
         </div>
         <div className="container3">
           <NavBar/>
