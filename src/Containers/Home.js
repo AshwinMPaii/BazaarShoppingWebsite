@@ -1,0 +1,44 @@
+import react from "react";
+import "./header.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import SearchBar from "../Components/searchbar";
+import {
+  faTwitter,
+  faFacebook,
+  faInstagram,
+} from "@fortawesome/free-brands-svg-icons";
+
+
+function Home(){
+    return (
+      <>
+        <div className="header1">
+          <div className="left_side">
+            <button className="button1">HOT</button>
+            <h5 className="header-text">Free Express Shipping</h5>
+          </div>
+          <div className="right_side">
+            <a href="https://twitter.com/">
+              <FontAwesomeIcon icon={faTwitter} color="white" />
+            </a>
+            <a href="https://www.facebook.com/">
+              <FontAwesomeIcon icon={faFacebook} color="white" />
+            </a>
+            <a href="https://www.instagram.com/">
+              <FontAwesomeIcon icon={faInstagram} color="white" />
+            </a>
+          </div>
+        </div>
+        <div className="container2">
+          <SearchBar/>
+          
+        </div>
+        <div className="container3">
+          
+        </div>
+      </>
+    );
+}
+
+export default Home;
