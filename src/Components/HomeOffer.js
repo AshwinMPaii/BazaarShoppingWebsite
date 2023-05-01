@@ -41,7 +41,7 @@ function HomeOffer() {
                     </div>
                 </div>
             </div>
-            <div className="radio-buttons-container" style={{ width: '100vh', height: '20vh', margin: 'auto' }}>
+            <div className="radio-buttons-container" style={{ display: 'flex', height: '5vh', alignItems: 'center', justifyContent: 'center' }}>
                 <label>
                     <input
                         type="radio"
