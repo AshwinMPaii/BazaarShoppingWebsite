@@ -1,0 +1,74 @@
+/* Style for the navbar container */
+.navbar {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  background-color: #f2f2f2;
+  padding: 5px;
+}
+
+/* Style for the dropdown container */
+.dropdown {
+  position: relative;
+  margin-right: 15rem;
+}
+
+/* Style for the dropdown button */
+.category {
+  display: inline-block;
+  color: #333;
+  text-decoration: none;
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Style for the dropdown content */
+.dropdown-content {
+  position: absolute;
+  z-index: 1;
+  display: none;
+  background-color: #fff;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  min-width: 200px;
+  margin-top: 5px;
+  
+}
+
+/* Style for the dropdown options */
+.dropdown-content select {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: #fff;
+  font-size: 16px;
+  padding: 10px;
+}
+
+/* Style for the dropdown when open */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Style for the options */
+.option {
+  color: #333;
+  text-decoration: none;
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 5rem;
+  
+  
+}
+
+/* Style for the options when hovered */
+.option:hover {
+  background-color: #ddd;
+}
+
+

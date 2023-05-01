@@ -3,11 +3,13 @@ import "./header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import SearchBar from "../Components/searchbar";
+import NavBar from "../Components/navbar";
 import {
   faTwitter,
   faFacebook,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
+
 
 
 function Home(){
@@ -35,7 +37,7 @@ function Home(){
           
         </div>
         <div className="container3">
-          
+          <NavBar/>
         </div>
       </>
     );
