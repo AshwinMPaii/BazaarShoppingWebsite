@@ -1,0 +1,72 @@
+.btn {
+  text-transform: uppercase;
+  background: red;
+  color: white;
+  padding: 0.75rem 1rem;
+  letter-spacing: 0.25rem;
+  display: inline-block;
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.homeOfferDescription {
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+}
+.homeOfferImage {
+  align-items: center;
+  justify-content: center;
+}
+.slide-in {
+  animation: slideIn 1s;
+}
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.title-container {
+  height: 70%;
+  width: 70%;
+  display: block;
+  /* margin: 100px; */
+}
+.title-head {
+  letter-spacing: 0.25rem;
+  text-transform: capitalize;
+  line-height: 1.25;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  animation: slideFromRight 5s ease-in-out 1;
+}
+@keyframes slideFromRight {
+  0% {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(-100px);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translateX(50px);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.title-body {
+  color: #617d98;
+  margin-bottom: 2rem;
+}
