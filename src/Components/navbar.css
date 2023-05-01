@@ -40,7 +40,7 @@
 /* Style for the dropdown options */
 .dropdown-content select {
   display: block;
-  width: 100%;
+  min-width: 200px;
   border: none;
   background-color: #fff;
   font-size: 16px;

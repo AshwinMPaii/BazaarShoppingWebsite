@@ -1,5 +1,6 @@
 import React from "react";
 import "./navbar.css"
+import { FaLaptop } from "react-icons/fa";
 
 
 
@@ -16,6 +17,7 @@ import "./navbar.css"
             <select>
               <option value="#">
                 Electronics
+                <FaLaptop />
               </option>
               <option value="#">Bikes</option>
               <option value="#">Fashion</option>
