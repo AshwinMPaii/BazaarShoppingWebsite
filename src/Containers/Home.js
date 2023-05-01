@@ -4,7 +4,7 @@ import HomeOffer from '../Components/HomeOffer'
 
 function Home() {
     return (
-        <div>
+        <div className='container4'>
             <HomeOffer />
         </div>
     )
