@@ -11,10 +11,10 @@ function HomeOffer() {
     };
 
     return (
-        <div className='main-container' style={{ width: '100vw', height: '80vh' }} >
+        <div className='main-container' style={{ display: 'flex', flexDirection: 'column' }} >
             <div
                 className="homeOfferContainer"
-                style={{ display: 'flex', width: '100vw', height: '80vh' }}
+                style={{ display: 'flex', height: '60vh' }}
             >
                 <div
                     className="homeOfferDescription"
@@ -32,16 +32,16 @@ function HomeOffer() {
                     </div>
                 </div>
                 <div className="homeOfferImage" style={{ display: 'flex', width: '50%' }}>
-                    <div style={{ display: 'flex', width: '80%' }}>
+                    <div style={{ display: 'block', margin: 'auto', height: '100%' }}>
                         {activeImageIndex === 0 ? (
-                            <img src={shoeImg1} alt="shoe-img" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+                            <img src={shoeImg1} alt="shoe-img" style={{ maxWidth: '100%', height: '100%' }} />
                         ) : (
-                            <img src={shoeImg2} alt="shoe-img" className="slide-in" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+                            <img src={shoeImg2} alt="shoe-img" className="slide-in" style={{ maxWidth: '100%', height: '100%' }} />
                         )}
                     </div>
                 </div>
             </div>
-            <div className="radio-buttons-container" style={{ display: 'flex', height: '5vh', alignItems: 'center', justifyContent: 'center' }}>
+            <div className="radio-buttons-container" style={{ display: 'flex', height: '1rem', alignItems: 'center', justifyContent: 'center' }}>
                 <label>
                     <input
                         type="radio"
