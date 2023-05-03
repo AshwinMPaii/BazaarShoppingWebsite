@@ -2,7 +2,11 @@ import React from "react";
 import "./navbar.css";
 import { FaLaptop } from "react-icons/fa";
 
+
+
+
 function NavBar() {
+
   return (
     <div class="navbar">
       <div class="dropdown">
@@ -21,16 +25,27 @@ function NavBar() {
           </select>
         </div>
       </div>
-      <div class="navbar-links">
-        <a href="#">Home</a>
-        <a href="#">Mega Menu</a>
-        <a href="#">Full Screen Menu</a>
-        <a href="#">Pages</a>
-        <a href="#">User Account</a>
-        <a href="#">Vendor Account</a>
-      </div>
+      <a href="#" class="option">
+        Home
+      </a>
+      <a href="#" class="option">
+        Mega Menu
+      </a>
+      <a href="#" class="option">
+        Full Screen Menu
+      </a>
+      <a href="#" class="option">
+        Pages
+      </a>
+      <a href="#" class="option">
+        User Account
+      </a>
+      <a href="#" class="option">
+        Vendror Account
+      </a>
     </div>
   );
+
 }
 
 export default NavBar;

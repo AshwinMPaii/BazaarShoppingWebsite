@@ -1,18 +1,15 @@
-
-/* Style for the navbar container */
 .navbar {
   display: flex;
   /* justify-content: space-between; */
   align-items: center;
   background-color: #f2f2f2;
   padding: 5px;
-  width: 100%;
 }
 
 /* Style for the dropdown container */
 .dropdown {
   position: relative;
-  margin-right: 15%;
+  margin-right: 15rem;
 }
 
 /* Style for the dropdown button */
@@ -33,10 +30,9 @@
   z-index: 1;
   display: none;
   background-color: #fff;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   min-width: 200px;
   margin-top: 5px;
-  
 }
 
 /* Style for the dropdown options */
@@ -55,28 +51,18 @@
 }
 
 /* Style for the options */
-.navbar-links {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 0 20px;
-  box-sizing: border-box;
-}
-
-.navbar-links a {
+.option {
   color: #333;
   text-decoration: none;
-  font-size: 16px;
-  margin: 0 10px;
   padding: 10px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  margin-right: 1rem;
+  border: none;
+  background-color: transparent;
+  font-size: 15px;
+  cursor: pointer;
+  margin-right: 3rem;
 }
 
-.navbar-links a:hover {
+/* Style for the options when hovered */
+.option:hover {
   background-color: #ddd;
 }
-
-
