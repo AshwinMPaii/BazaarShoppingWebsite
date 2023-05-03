@@ -36,10 +36,10 @@ import HomeOffer from '../Components/HomeOffer';
 function Home() {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-            <div style={{ flex: '0 0 10%', minWidth: '100vw' }}>
+            <div style={{ flex: '0 0 7%', minWidth: '100vw' }}>
                 <Head />
             </div>
-            <div style={{ flex: '0 0 20%', minWidth: '100vw' }}>
+            <div style={{ flex: '0 0 10%', minWidth: '100vw' }}>
                 <SearchBar />
             </div>
             <div style={{ flex: '0 0 10%', minWidth: '100vw' }}>

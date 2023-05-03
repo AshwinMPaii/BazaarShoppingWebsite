@@ -11,7 +11,7 @@ function HomeOffer() {
     };
 
     return (
-        <div className='main-container' style={{ width: '100vw', height: '80vh' }} >
+        <div className='main-container' style={{ width: '100vw', height: '80vh', }} >
             <div
                 className="homeOfferContainer"
                 style={{ display: 'flex', width: '100vw', height: '80vh' }}
