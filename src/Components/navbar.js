@@ -9,7 +9,7 @@ function NavBar() {
 
   return (
     <div class="navbar">
-      <div class="dropdown">
+      <div class="dropdown1">
         <a href="#" class="category">
           Category ▼
         </a>
@@ -25,24 +25,26 @@ function NavBar() {
           </select>
         </div>
       </div>
-      <a href="#" class="option">
-        Home
-      </a>
-      <a href="#" class="option">
-        Mega Menu
-      </a>
-      <a href="#" class="option">
-        Full Screen Menu
-      </a>
-      <a href="#" class="option">
-        Pages
-      </a>
-      <a href="#" class="option">
-        User Account
-      </a>
-      <a href="#" class="option">
-        Vendror Account
-      </a>
+      <div class="nav-links">
+        <a href="#" class="option">
+          Home
+        </a>
+        <a href="#" class="option">
+          Mega Menu
+        </a>
+        <a href="#" class="option">
+          Full Screen Menu
+        </a>
+        <a href="#" class="option">
+          Pages
+        </a>
+        <a href="#" class="option">
+          User Account
+        </a>
+        <a href="#" class="option">
+          Vendror Account
+        </a>
+      </div>
     </div>
   );
 

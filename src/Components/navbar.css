@@ -1,13 +1,13 @@
 .navbar {
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   align-items: center;
   background-color: #f2f2f2;
   padding: 5px;
 }
 
 /* Style for the dropdown container */
-.dropdown {
+.dropdown1 {
   position: relative;
   margin-right: 15rem;
 }
@@ -46,7 +46,7 @@
 }
 
 /* Style for the dropdown when open */
-.dropdown:hover .dropdown-content {
+.dropdown1:hover .dropdown-content {
   display: block;
 }
 
