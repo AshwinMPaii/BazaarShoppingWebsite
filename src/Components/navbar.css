@@ -7,7 +7,7 @@
 }
 
 /* Style for the dropdown container */
-.dropdown {
+.dropdown1 {
   position: relative;
   margin-right: 15rem;
 }
@@ -46,7 +46,7 @@
 }
 
 /* Style for the dropdown when open */
-.dropdown:hover .dropdown-content {
+.dropdown1:hover .dropdown-content {
   display: block;
 }
 
@@ -65,4 +65,7 @@
 /* Style for the options when hovered */
 .option:hover {
   background-color: #ddd;
+}
+.nav-links{
+  justify-content: space-between;
 }
