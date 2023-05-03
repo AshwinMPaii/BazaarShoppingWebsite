@@ -22,7 +22,7 @@
 
   /* border-radius: 25px; */
   overflow: hidden;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
   position: relative;
   flex-grow: 1;
 }
@@ -62,7 +62,7 @@
   display: flex;
   align-items: center;
   margin-left: 1rem;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
 }
 
 .round-button {
