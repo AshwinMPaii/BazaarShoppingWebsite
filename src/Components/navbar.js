@@ -16,7 +16,7 @@ function NavBar() {
     <div class="navbar">
       <ul className="nav-links">
               
-              <li className="dropdown">
+              <li className="dropdown1">
                 <a href="/">
                   Categories <FaChevronDown/>
                 </a>
