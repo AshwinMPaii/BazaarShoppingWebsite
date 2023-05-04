@@ -5,6 +5,8 @@ import { FaUser, FaShoppingCart } from "react-icons/fa";
 import logo from "../Assets/Icons/logo.png";
 import signUp from "../Assets/Images/signup.png";
 import backgroundImageLogin from "../Assets/Images/backimagelogin.jpg";
+import ShoppingCart from "./ShoppingCart";
+
 const SearchBar = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -75,8 +77,12 @@ const SearchBar = () => {
           <FaUser className="button-icon" />
         </button>
         <button className="round-button">
-          <FaShoppingCart className="button-icon" />
+          <ShoppingCart />
         </button>
+
+        {/* <button className="round-button">
+          <FaShoppingCart className="button-icon" />
+        </button> */}
       </div>
       {isModalOpen && (
         <div className="modal">
