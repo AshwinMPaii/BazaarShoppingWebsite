@@ -1,6 +1,6 @@
 .navbar {
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   align-items: center;
   background-color: #f2f2f2;
   padding: 5px;
@@ -65,7 +65,4 @@
 /* Style for the options when hovered */
 .option:hover {
   background-color: #ddd;
-}
-.nav-links{
-  justify-content: space-between;
 }
