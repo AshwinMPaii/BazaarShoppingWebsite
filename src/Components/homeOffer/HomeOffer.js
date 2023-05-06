@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './HomeOffer.css';
-import shoeImg1 from '../Assets/Images/shoepic.PNG';
-import shoeImg2 from '../Assets/Images/shoe2.png';
+import shoeImg1 from '../../Assets/Images/shoepic.PNG';
+import shoeImg2 from '../../Assets/Images/shoe2.png';
 
 function HomeOffer() {
     const [activeImageIndex, setActiveImageIndex] = useState(0);
