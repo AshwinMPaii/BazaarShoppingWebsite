@@ -28,10 +28,15 @@
 
 // export default Home
 import React from 'react';
-import SearchBar from '../Components/searchbar';
-import NavBar from '../Components/navbar';
-import Head from '../Components/head';
-import HomeOffer from '../Components/HomeOffer';
+// import SearchBar from '../Components/searchBar/searchbar';
+// import NavBar from '../Components/navbar/navbar';
+// import Head from '../Components/header/head';
+// import HomeOffer from '../Components/homeOffer/HomeOffer';
+import Head from '../../Components/header/head';
+import HomeOffer from '../../Components/homeOffer/HomeOffer';
+import NavBar from '../../Components/navbar/navbar';
+import SearchBar from '../../Components/searchBar/searchbar';
+
 import "./Home.css"
 
 

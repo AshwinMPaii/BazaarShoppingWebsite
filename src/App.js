@@ -1,4 +1,4 @@
-import Home from './Containers/Home'
+import Home from './Containers/home/Home'
 
 function App() {
   return (

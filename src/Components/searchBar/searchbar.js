@@ -1,11 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import "./component.css";
-import { FaUser, FaShoppingCart } from "react-icons/fa";
-import logo from "../Assets/Icons/logo.png";
-import signUp from "../Assets/Images/signup.png";
-import backgroundImageLogin from "../Assets/Images/backimagelogin.jpg";
-import ShoppingCart from "./ShoppingCart";
+import { FaUser} from "react-icons/fa";
+import logo from "../../Assets/Icons/logo.png";
+import signUp from "../../Assets/Images/signup.png";
+import backgroundImageLogin from "../../Assets/Images/backimagelogin.jpg";
+import ShoppingCart from "../shopping/ShoppingCart";
 
 const SearchBar = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
