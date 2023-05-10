@@ -1,10 +1,10 @@
-import Home from './Containers/home/Home'
+// import Home from './Containers/home/Home'
+import TimelineButtons from "./Containers/TimelineB/Timelinepages";
 
 function App() {
   return (
     <div className="App">
-      <Home />
-
+      <TimelineButtons />
     </div>
   );
 }
