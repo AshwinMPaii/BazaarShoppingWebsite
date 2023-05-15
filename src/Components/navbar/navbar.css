@@ -3,13 +3,26 @@
   justify-content: space-between;
   align-items: center;
   background-color: #f2f2f2;
-  padding: 5px;
+  padding: 0.5rem;
+}
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+}
+
+.nav-links li a {
+  color: black;
+  text-decoration: none;
+  padding: 0.5rem;
 }
 
 /* Style for the dropdown container */
 .dropdown1 {
   position: relative;
-  margin-right: 15rem;
+  /* margin-right: 15rem; */
 }
 
 /* Style for the dropdown button */
@@ -25,7 +38,7 @@
 }
 
 /* Style for the dropdown content */
-.dropdown-content {
+/* .dropdown-content {
   position: absolute;
   z-index: 1;
   display: none;
@@ -33,21 +46,37 @@
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   min-width: 200px;
   margin-top: 5px;
+} */
+.dropdown-content {
+  position: absolute;
+  background-color: #fff;
+  display: none;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+/* Style for the dropdown when open */
+.dropdown1:hover .dropdown-content {
+  display: block;
 }
 
 /* Style for the dropdown options */
-.dropdown-content select {
+/* .dropdown-content select {
   display: block;
   min-width: 200px;
   border: none;
   background-color: #fff;
   font-size: 16px;
   padding: 10px;
+} */
+.dropdown-content a {
+  color: #333;
+  display: block;
+  padding: 0.5rem;
+  text-decoration: none;
 }
 
-/* Style for the dropdown when open */
-.dropdown1:hover .dropdown-content {
-  display: block;
+.dropdown-content a:hover {
+  background-color: #eee;
 }
 
 /* Style for the options */

@@ -24,7 +24,7 @@ const ShoppingCart = () => {
   return (
     <>
       {!isPopupOpen && (
-        <div  onClick={handleCartButtonClick}>
+        <div onClick={handleCartButtonClick}>
           <FaShoppingCart className="button-icon" />
         </div>
       )}
@@ -63,13 +63,7 @@ const ShoppingCart = () => {
           </div>
         </>
       )}
-      {isPopupOpen && (
-        <div className="view-cart-section" style={{ border: "2px solid pink" }}>
-          <h3>View Cart</h3>
-          {/* Add your code for displaying the cart items here */}
-          <button className="view-cart-button">View Cart</button>
-        </div>
-      )}
+
     </>
   );
 };
