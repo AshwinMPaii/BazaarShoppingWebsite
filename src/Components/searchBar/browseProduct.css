@@ -1,0 +1,16 @@
+.search-bar-container {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  flex-grow: 1;
+  margin-right: -210px; /* Remove the right margin */
+}
+
+.search-bar {
+  border: none;
+  width: 60%;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 25px 0 0 25px;
+}
