@@ -1,17 +1,13 @@
 .header1 {
   font-size: 75%;
-  background-color:#191970;
+  background-color: #191970;
   color: aliceblue;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2px;
-  margin:0;
+  margin: 0;
 }
-
-
-
-
 
 .left_side {
   margin-left: 35px;
@@ -24,7 +20,6 @@
   padding-top: auto;
   font-size: 10px;
 }
-
 
 .button1 {
   background-color: red;
@@ -47,6 +42,5 @@
 
 .right_side a {
   margin-left: 10px;
-  color: white;
+  color: white;
 }
-

@@ -4,6 +4,7 @@ import { FaLaptop } from "react-icons/fa";
 // import "@fortawesome/fontawesome-free/css/all.css";
 import { FaShoppingBasket, FaChevronDown, FaBicycle, FaTv, FaTshirt } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from 'react-router-dom';
 
 
 
@@ -21,9 +22,11 @@ function NavBar() {
             Categories <FaChevronDown />
           </a>
           <div className="dropdown-content">
-            <a href="#" class="category">
-              <FaTshirt /> Fashion
-            </a>
+            <Link to="/time5">
+              <a href="#" class="category">
+                <FaTshirt /> Fashion
+              </a>
+            </Link>
             <a href="#" class="category">
               <FaBicycle /> Bikes
             </a>

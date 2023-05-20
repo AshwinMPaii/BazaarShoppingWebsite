@@ -1,17 +1,21 @@
 import Home from './Containers/home/Home';
 import { Routes, Route } from 'react-router-dom';
-//import Products from './Components/Product';
-//import SignUp from './Components/searchBar/signUp';
-//import Cart from './Components/Cartpage/cart';
+import Cartpage from './Containers/cartPage/cartpage';
+import Detailpage from './Containers/detailsPage/DetailPage';
+import Paymentpage from './Containers/paymentPage/paymentpage';
+import Productpage from './Containers/productPage/productpage';
+import ProductDetails from './Containers/productDetails/productdetails'
 
 function App() {
   return (
     <div>
-      {/* <SignUp /> */}
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path='products' element={<Products />} /> */}
-        {/* <Route path='/cart' element={<Cart />}></Route> */}
+        <Route path='/time1' element={<Cartpage />} />
+        <Route path='/time2' element={<Detailpage />}></Route>
+        <Route path='/time3' element={<Paymentpage />}></Route>
+        <Route path="/time5" element={<Productpage />} />
+        <Route path="/productdetails/:id" element={<ProductDetails />} />
       </Routes>
     </div>
   );

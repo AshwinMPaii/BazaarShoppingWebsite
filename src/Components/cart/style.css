@@ -1,0 +1,181 @@
+.cart-page {
+  display: flex;
+  justify-content: space-between;
+  height: 90vh;
+  /* flex-grow: 1; */
+}
+
+.cart-items {
+  width: 70%;
+  padding: 1rem;
+  height: 70vh;
+  overflow-y: scroll;
+  /* overflow: hidden; */
+}
+
+.cart-items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+  border: transparent;
+  border-radius: 0.5rem;
+  position: relative;
+}
+.cart-img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.cart-text-head {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 17px;
+  font-weight: bold;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+.cart-text-price {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 13px;
+  font-weight: 200;
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+.cart-text-quantity {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0px 10px;
+}
+.in-dec-bt {
+  display: block;
+  padding: 3px;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  background-color: transparent;
+  color: black;
+  border: 0.5px solid crimson;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.in-dec-bt:hover {
+  background: crimson;
+}
+/* .cart-img-container img {
+  /* width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 10px; */
+/* object-fit: contain; */
+
+.item-details {
+  /* margin-left: 50px;
+  margin-right: 40rem; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 20px;
+}
+
+.item-delete {
+  position: absolute;
+  top: 0px;
+  right: 4px;
+  color: black;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.cart-form-container {
+  width: 30%;
+  max-width: 570px;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+}
+.cart-form {
+  margin: 0 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.cart-form p {
+  font-size: 14px;
+  font-weight: 100;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+.cart-form span {
+  font-weight: 700;
+  margin-left: 10px;
+}
+
+.cart-page textarea {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.cart-form-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 37%;
+}
+.cart-form-shipest {
+  padding: 8px 10px;
+  font-size: 13px;
+  border-radius: 4px;
+  border: 1.5px solid #ccc;
+}
+.cart-form-btn {
+  display: block;
+  width: 100%;
+  padding: 7px;
+  background-color: transparent;
+  color: crimson;
+  border: 0.5px solid crimson;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.cart-form-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.cart-form-btn:hover {
+  background-color: crimson;
+  color: white;
+}
+
+/* .cart-form-btn:active {
+  background-color: rgb(249, 11, 11);
+  color: white;
+} */
+
+.line {
+  display: inline-flex;
+  justify-content: space-between;
+}

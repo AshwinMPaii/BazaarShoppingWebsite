@@ -1,0 +1,8 @@
+.star-rating {
+  display: inline-block;
+}
+
+.star-icon {
+  color: gold;
+  font-size: 1.2rem;
+}
