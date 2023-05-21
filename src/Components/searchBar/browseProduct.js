@@ -1,75 +1,31 @@
 import React, { useState } from "react";
 import "./browseProduct.css";
-import shoeImg1 from "../../Assets/Images/shoepic.PNG";
-import shoeImg2 from "../../Assets/Images/shoe2.png";
 
 const BrowseProduct = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
-  const products = [
-    {
-      id: 1,
-      name: "Product 1",
-      price: 9.99,
-      imageSrc: shoeImg1,
-    },
-    {
-      id: 2,
-      name: "Product 2",
-      price: 14.99,
-      imageSrc: shoeImg2,
-    },
-    {
-      id: 3,
-      name: "Product 3",
-      price: 9.99,
-      imageSrc: "path/to/image1.jpg",
-    },
-    {
-      id: 4,
-      name: "Product 4",
-      price: 14.99,
-      imageSrc: "path/to/image2.jpg",
-    },
-    {
-      id: 5,
-      name: "Product 5",
-      price: 9.99,
-      imageSrc: "path/to/image1.jpg",
-    },
-    {
-      id: 6,
-      name: "Product 6",
-      price: 14.99,
-      imageSrc: "path/to/image2.jpg",
-    },
-    {
-      id: 7,
-      name: "Product 7",
-      price: 9.99,
-      imageSrc: "path/to/image1.jpg",
-    },
-    {
-      id: 8,
-      name: "Product 8",
-      price: 14.99,
-      imageSrc: "path/to/image2.jpg",
-    },
-    {
-      id: 9,
-      name: "Product 9",
-      price: 9.99,
-      imageSrc: "path/to/image1.jpg",
-    },
-    {
-      id: 10,
-      name: "Product 10",
-      price: 14.99,
-      imageSrc: "path/to/image2.jpg",
-    },
-    // Add more products as needed
-  ];
+
+  const products = [];
+
+  fetch('http://localhost:8080/products')
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(product => {
+        products.push({
+          id: product.productId,
+          name: product.name,
+          description: product.description,
+          price: product.price,
+          imageSrc: product.imageUrl
+        });
+      });
+      console.log(products);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+
 
   const handleChange = (event) => {
     const { value } = event.target;
@@ -79,12 +35,32 @@ const BrowseProduct = () => {
       product.name.toLowerCase().includes(value.toLowerCase())
     );
     setSuggestions(filteredSuggestions);
+    if (value === "") {
+      setSuggestions([]);
+    }
   };
 
-  const handleSelect = (selectedProduct) => {
+  /*const handleSelect = (selectedProduct) => {
     console.log("Selected Product:", selectedProduct);
     // Implement your logic to handle the selection of a product
   };
+  */
+
+  const handleSelect = (selectedProduct) => {
+    console.log("Selected Product:", selectedProduct);
+
+    fetch(`http://localhost:8080/products/${selectedProduct.id}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log("Product Details:", data);
+
+        // Implement your logic to display the product details to the user
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  };
+
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
@@ -123,3 +99,4 @@ const BrowseProduct = () => {
 };
 
 export default BrowseProduct;
+
