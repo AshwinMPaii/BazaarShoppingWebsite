@@ -93,34 +93,35 @@ const SignUp = (props) => {
       password,
     };
 
-    // Send the login data to the backend
-    fetch("http://localhost:8080/users/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(loginData),
-    }).then((response) => {
-      // Handle the response from the backend
-      if (response.ok) {
-        // Login successful, handle accordingly
-        response
-          .json()
-          .then((data) => {
-            const token = data.token;
-            console.log("Login successful. Token:", token);
-            props.onClose();
-            setIsLoginModalOpen(true);
-          })
-          .catch((error) => {
-            alert("connection error!!!");
-          });
-      } else {
-        // Login failed, handle accordingly
-        console.log("Login failed");
-      }
-    });
-  };
+        // Send the login data to the backend
+        fetch("http://localhost:8080/users/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(loginData)
+        })
+            .then(response => {
+                // Handle the response from the backend
+                if (response.ok) {
+                    // Login successful, handle accordingly
+                    response.json().then(data => {
+                        const token = data.token;
+                        console.log("Login successful. Token:", token);
+                        props.onClose();
+                        setIsLoginModalOpen(true);
+                    })
+                        .catch(error => {
+                            alert("connection error!!!")
+                        });
+
+
+                } else {
+                    // Login failed, handle accordingly
+                    console.log("Login failed");
+                }
+            });
+    };
 
   return (
     <>
