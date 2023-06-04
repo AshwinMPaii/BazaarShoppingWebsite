@@ -13,11 +13,16 @@
   border-radius: 8px;
   padding: 16px;
   margin: 8px;
-  width: 300px;
-  height: 400px;
+  width: 250px;
+  height: 350px;
   background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(121, 120, 126, 0.1);
   text-decoration: none;
+  transition: all 0.3s linear;
+}
+.product-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 5px 15px rgba(41, 41, 238, 0.7);
 }
 
 .product-card img {

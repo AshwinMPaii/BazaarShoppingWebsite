@@ -1,10 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './det.css';
 import { Link } from 'react-router-dom';
 
 const countries = ['Country A', 'Country B', 'Country C']; // Example list of countries
 
 const Details = () => {
+  const [totalAmount, setTotalAmount] = useState(null);
+  const [tax, setTax] = useState(null);
+  const [subTotal, setSubTotal] = useState(null);
+
+  useEffect(() => {
+    const fetchTotalAmount = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/carts/totalPrice/1');
+        const data = await response.json();
+        setTotalAmount(data['Total Amount']);
+        setTax(data['tax']);
+        setSubTotal(data['Sub-Total']);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    // Fetch total amount initially
+    fetchTotalAmount();
+
+    // Poll for total amount every 5 seconds (adjust the interval as needed)
+    const intervalId = setInterval(fetchTotalAmount, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
   const [shippingAddress, setShippingAddress] = useState({
     fullName: "",
     email: "",
@@ -245,12 +273,14 @@ const Details = () => {
         </div>
         <div className="twobuttons">
           <div className="b">
-            <Link to="/time">
+            <Link to="/time1">
               <button>Back To cart</button>
             </Link>
           </div>
           <div className="b">
-            <button>Proceed To Payment</button>
+            <Link to='/time3'>
+              <button>Proceed To Payment</button>
+            </Link>
           </div>
         </div>
       </div>
@@ -259,19 +289,19 @@ const Details = () => {
         <div className="summary-details">
           <div>
             <label>Subtotal:</label>
-            <span>$100</span>
+            <span>${subTotal}</span>
           </div>
           <div>
             <label>Shipping Tax:</label>
-            <span>$10</span>
+            <span>${tax}</span>
           </div>
           <div>
             <label>Discount:</label>
-            <span>$5</span>
+            <span>-</span>
           </div>
           <div>
             <label>Total:</label>
-            <span>$105</span>
+            <span>${totalAmount}</span>
           </div>
         </div>
         <input

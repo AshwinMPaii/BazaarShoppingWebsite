@@ -14,8 +14,10 @@ function App() {
         <Route path='/time1' element={<Cartpage />} />
         <Route path='/time2' element={<Detailpage />}></Route>
         <Route path='/time3' element={<Paymentpage />}></Route>
-        <Route path="/time5" element={<Productpage />} />
+        {/* <Route path="/time5" element={<Productpage />} /> */}
+        <Route path="/productlist/:categoryId" element={<Productpage />} />
         <Route path="/productdetails/:id" element={<ProductDetails />} />
+        {/* <Route path="/cart" element={<CartItems />} /> */}
       </Routes>
     </div>
   );

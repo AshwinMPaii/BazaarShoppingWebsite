@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { FaShoppingCart, FaShoppingBag, FaTimes } from "react-icons/fa";
 import "./ShoppingCart.css";
+import CartItems from "../cart/cartItems";
+import { Link } from 'react-router-dom';
 
 const ShoppingCart = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -41,24 +43,31 @@ const ShoppingCart = () => {
                 onClick={handleCloseButtonClick}
               />
             </div>
+            <div className="pop-up-middle">
+              <CartItems />
+            </div>
 
             <div className="popup-footer">
-              <div className="button-row">
+              {/* <div className="button-row"> */}
+              <Link to='/time2' className="check-me-be">
                 <button
                   className="checkout-button"
                   onClick={handleCheckoutButtonClick}
                 >
                   Checkout Now
                 </button>
-              </div>
-              <div className="button-row">
+              </Link>
+              {/* </div> */}
+              {/* <div className="button-row"> */}
+              <Link to='/time1' className="check-me-be">
                 <button
                   className="view-cart-button"
                   onClick={handleViewCartButtonClick}
                 >
                   View Cart
                 </button>
-              </div>
+              </Link>
+              {/* </div> */}
             </div>
           </div>
         </>

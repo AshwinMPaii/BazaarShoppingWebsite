@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 //import imgi from "./shopping-cart.jpeg";
 //import shoePic from '../../Assets/Images/shoe2.png'
 import { Link } from "react-router-dom";
 import CartItems from "./cartItems";
 //import { itemsData } from "./cartItems";
-import { totalCost } from "./cartItems";
+//import { totalCost } from "./cartItems";
 
 
 const Cart = () => {
 
-
+  const [totalAmount, setTotalAmount] = useState(null);
   const [comments, setComments] = useState("");
   const [voucher, setVoucher] = useState("");
   // const [shippingDetails, setShippingDetails] = useState("");
@@ -44,7 +44,27 @@ const Cart = () => {
   // const handleShippingDetailsChange = (e) => {
   //   setShippingDetails(e.target.value);
   // };
+  useEffect(() => {
+    const fetchTotalAmount = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/carts/totalPrice/1');
+        const data = await response.json();
+        setTotalAmount(data['Total Amount']);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
 
+    // Fetch total amount initially
+    fetchTotalAmount();
+
+    // Poll for total amount every 5 seconds (adjust the interval as needed)
+    const intervalId = setInterval(fetchTotalAmount, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
 
 
@@ -53,13 +73,23 @@ const Cart = () => {
 
   return (
     <div className="cart-page">
-      <CartItems />
+      <div className='cart-items-container'>
+        <CartItems />
+      </div>
 
       <div className="cart-form-container">
         <div className="cart-form">
+          {/* <div>
+            <p>Total Cost:<span>{totalPrice.tax}</span></p>
+          </div> */}
           <div>
-            <p>Total Cost:<span>${totalCost.toFixed(2)}</span> </p>
+            {totalAmount !== null ? (
+              <p>Total Amount: <span>{totalAmount}</span></p>
+            ) : (
+              <p>Loading...</p>
+            )}
           </div>
+
           <div className="cart-form-content">
             <textarea
               placeholder="Additional comments"

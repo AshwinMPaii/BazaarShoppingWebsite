@@ -115,6 +115,8 @@ const SignUp = (props) => {
                     response.json().then(data => {
                         const token = data.token;
                         console.log("Login successful. Token:", token);
+                        props.onClose();
+                        setIsLoginModalOpen(true);
                     })
                         .catch(error => {
                             alert("connection error!!!")
