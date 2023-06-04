@@ -5,7 +5,7 @@ import "./style.css";
 import { Link } from "react-router-dom";
 import CartItems from "./cartItems";
 //import { itemsData } from "./cartItems";
-import { totalCost } from "./cartItems";
+// import { totalCost } from "./cartItems";
 
 
 const Cart = () => {
@@ -58,7 +58,7 @@ const Cart = () => {
       <div className="cart-form-container">
         <div className="cart-form">
           <div>
-            <p>Total Cost:<span>${totalCost.toFixed(2)}</span> </p>
+            {/* <p>Total Cost:<span>${totalCost.toFixed(2)}</span> </p> */}
           </div>
           <div className="cart-form-content">
             <textarea

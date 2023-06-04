@@ -1,90 +1,65 @@
-import React, { useState } from 'react';
-import "./style.css";
-import imgi from "./shopping-cart.jpeg";
-
-
-export const itemsData = [
-
-    { id: 1, name: "Item 1", price: 10, quantity: 5, maxquantity: 5 },
-    { id: 2, name: "Item 2", price: 15, quantity: 2, maxquantity: 7 },
-    { id: 3, name: "Item 1", price: 10, quantity: 5, maxquantity: 5 },
-    { id: 4, name: "Item 2", price: 15, quantity: 2, maxquantity: 7 },
-    { id: 5, name: "Item 1", price: 10, quantity: 5, maxquantity: 5 },
-
-]
-export const totalCost = calculateTotal(itemsData);
-function calculateTotal(itemsData) {
-    return itemsData.reduce((total, item) => {
-        return total + item.price * item.quantity;
-    }, 0);
-}
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const CartItems = () => {
-    const [items, setItems] = useState(itemsData)
+  const [cartItems, setCartItems] = useState([]);
 
-    const handleDeleteItem = (itemId) => {
-        setItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
-    };
-    const handleQuantityChange = (itemId, newQuantity) => {
-        setItems((prevItems) =>
-            prevItems.map((item) =>
-                item.id === itemId
-                    ? {
-                        ...item,
-                        quantity: Math.min(Math.max(newQuantity, 1), item.maxquantity),
-                    }
-                    : item
-            )
-        );
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/carts/1");
+        setCartItems(response.data);
+      } catch (error) {
+        console.log(error);
+      }
     };
 
+    fetchCartItems();
+  }, []);
 
+  const handleDeleteItem = async (productId) => {
+    try {
+      await axios.delete(`http://localhost:8080/carts/1/${productId}`);
+      setCartItems((prevCartItems) =>
+        prevCartItems.filter((item) => item.id !== productId)
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    // export const totalCost = calculateTotal(itemsData);
-    return (
-        <div className="cart-items">
-            {items.map((item) => (
-                <div key={item.id} className="cart-item">
-                    <div className="cart-img-container">
-                        <img src={imgi} alt={item.name} />
-                    </div>
-                    <div className="item-details">
-                        <p className='cart-text-head'>{item.name}</p>
-                        <p className='cart-text-price'>Price: ${item.price}</p>
-                        <div className="quantity">
-                            <div className="line">
-                                <button
-                                    className="in-dec-bt"
-                                    onClick={() =>
-                                        handleQuantityChange(item.id, item.quantity - 1)
-                                    }
-                                    disabled={item.quantity === 1}
-                                >
-                                    -
-                                </button>
+  const handleIncreaseQuantity = async (productId) => {
+    try {
+      await axios.put(`http://localhost:8080/carts/1/${productId}/1`, {});
+      setCartItems((prevCartItems) =>
+        prevCartItems.map((item) => {
+          if (item.id === productId) {
+            return { ...item, quantity: item.quantity + 1 };
+          }
+          return item;
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-                                <span className='cart-text-quantity'>{item.quantity}</span>
-                                <button
-                                    className="in-dec-bt"
-                                    onClick={() =>
-                                        handleQuantityChange(item.id, item.quantity + 1)
-                                    }
-                                >
-                                    +
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        className="item-delete"
-                        onClick={() => handleDeleteItem(item.id)}
-                    >
-                        X
-                    </div>
-                </div>
-            ))}
+  return (
+    <div className="cart-items">
+      {cartItems.map((item) => (
+        <div key={item.id} className="cart-item">
+          <p>{item.name}</p>
+          <p>Price: ${item.price}</p>
+          <div className="quantity">
+            <button>-</button>
+            <span>{item.quantity}</span>
+            <button onClick={() => handleIncreaseQuantity(item.id)}>+</button>
+          </div>
+          <button onClick={() => handleDeleteItem(item.id)}>Delete</button>
         </div>
-    )
-}
+      ))}
+    </div>
+  );
+};
 
-export default CartItems
+export default CartItems;

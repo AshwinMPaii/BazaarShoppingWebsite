@@ -12,34 +12,30 @@ import { Link } from 'react-router-dom';
 
 
 function NavBar() {
-
+   
   return (
-    <div class="navbar">
+    <div className="navbar">
       <ul className="nav-links">
-
         <li className="dropdown1">
-          <a href="#" class="category">
+          <Link to="/" className="category">
             Categories <FaChevronDown />
-          </a>
+          </Link>
           <div className="dropdown-content">
-            <Link to="/time5">
-              <a href="#" class="category">
-                <FaTshirt /> Fashion
-              </a>
+            <Link to="/productlist/3" className="category">
+              <FaTshirt /> Fashion
             </Link>
-            <a href="#" class="category">
+            <Link to="/productlist/1" className="category">
               <FaBicycle /> Bikes
-            </a>
-            <a href="#" class="category">
+            </Link>
+            <Link to="/productlist/4" className="category">
               <FaShoppingBasket /> Groceries
-            </a>
-            <a href="#" class="category">
+            </Link>
+            <Link to="/productlist/2" className="category">
               <FaTv /> Electronics
-            </a>
+            </Link>
           </div>
         </li>
       </ul>
-
 
       <div class="nav-links">
         <a href="#" class="option">
@@ -62,7 +58,6 @@ function NavBar() {
         </a>
       </div>
     </div>
-
   );
 
 }

@@ -5,6 +5,10 @@ import React, { useState } from "react";
 import "./signUp.css";
 
 const SignUp = (props) => {
+  // const onClose = () => {
+  //     props.setIsModalOpen(false);
+  // };
+
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,10 +16,14 @@ const SignUp = (props) => {
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isSignUp, setIsSignUp] = useState(false);
+  // const [errorMessage, setErrorMessage] = useState('');
 
   const handleCloseModal = () => {
     props.onClose();
     setIsLoginModalOpen(true);
+    // setEmail('');
+    // setPassword('');
+    // setConfirmPassword('');
   };
 
   const handleSignUpClick = () => {
@@ -30,40 +38,88 @@ const SignUp = (props) => {
 
   const handleSignUp = (event) => {
     event.preventDefault();
-    // Existing sign up logic
+    console.log("Sign up clicked!");
+
+    const isValidEmail = /\S+@gmail\.com/.test(email); //returns true or false
+    setIsEmailValid(isValidEmail);
+    const regex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const isValidPassword = regex.test(password);
+    setIsPasswordValid(isValidPassword);
+    if (isValidEmail && isValidPassword) {
+      if (password === confirmPassword) {
+        const signUpData = {
+          email,
+          password,
+        };
+
+        fetch("http://localhost:8080/users/add", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(signUpData),
+        })
+          .then((response) => {
+            // Handle the response from the backend
+            if (response.ok) {
+              // Login successful, handle accordingly
+              response.text().then((data) => {
+                console.log("SignUp successful. Response:", data);
+              });
+            } else {
+              // Login failed, handle accordingly
+              alert("Sign Up failed");
+            }
+          })
+          .catch((error) => {
+            alert("connection error!!!");
+          });
+      } else {
+        alert("password doesn't match");
+      }
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+    } else {
+      alert("Invalid email or password");
+    }
   };
 
   const handleLogIn = (event) => {
     event.preventDefault();
-    // Existing log in logic
-  };
+    const loginData = {
+      firstname: email,
+      password,
+    };
 
-  const forgotPassword = () => {
-    const email = prompt("Enter your email address");
-    if (email) {
-      // Send an email to the user with a link to reset their password
-      fetch(`http://localhost:8080/users/forgot-password?email=${email}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => {
-          // Handle the response from the backend
-          if (response.ok) {
-            // Email sent successfully, handle accordingly
-            alert(
-              "An email has been sent to you with a link to reset your password"
-            );
-          } else {
-            // Email failed to send, handle accordingly
-            alert("An error occurred while sending the email");
-          }
-        })
-        .catch((error) => {
-          alert("connection error!!!");
-        });
-    }
+    // Send the login data to the backend
+    fetch("http://localhost:8080/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(loginData),
+    }).then((response) => {
+      // Handle the response from the backend
+      if (response.ok) {
+        // Login successful, handle accordingly
+        response
+          .json()
+          .then((data) => {
+            const token = data.token;
+            console.log("Login successful. Token:", token);
+            props.onClose();
+            setIsLoginModalOpen(true);
+          })
+          .catch((error) => {
+            alert("connection error!!!");
+          });
+      } else {
+        // Login failed, handle accordingly
+        console.log("Login failed");
+      }
+    });
   };
 
   return (
@@ -108,8 +164,8 @@ const SignUp = (props) => {
                     name="password"
                     required
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
                     className="modalinput"
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                   <div className="button-container">
                     <button onClick={handleLogIn} className="button-login">
@@ -119,10 +175,6 @@ const SignUp = (props) => {
                   <p>
                     Don't have an account?{" "}
                     <span onClick={handleSignUpClick}>Sign up</span>
-                  </p>
-                  <p>
-                    Forgot password?{" "}
-                    <span onClick={forgotPassword}>Click here</span>
                   </p>
                 </form>
               </div>
@@ -135,6 +187,7 @@ const SignUp = (props) => {
                 </div>
                 <form onSubmit={handleSignUp}>
                   <h3>Sign Up</h3>
+                  {/* {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>} */}
                   <label htmlFor="email">Email or phone:</label>
                   <input
                     type="text"
@@ -142,8 +195,8 @@ const SignUp = (props) => {
                     name="email"
                     required
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
                     className="modalinput"
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                   <label htmlFor="password">Password:</label>
                   <input
@@ -152,9 +205,13 @@ const SignUp = (props) => {
                     name="password"
                     required
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
                     className="modalinput"
+                    onChange={(e) => setPassword(e.target.value)}
                   />
+                  {/* {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+                                    {!isPasswordValid && (
+                                        <p style={{ color: 'red' }}>Invalid Password</p>
+                                    )} */}
                   <label htmlFor="confirm-password">Confirm Password:</label>
                   <input
                     type="password"
@@ -162,8 +219,8 @@ const SignUp = (props) => {
                     name="confirm-password"
                     required
                     value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
                     className="modalinput"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                   />
                   <div className="button-container">
                     <button onClick={handleSignUp} className="button-login">
@@ -173,10 +230,6 @@ const SignUp = (props) => {
                   <p>
                     Already have an account?{" "}
                     <span onClick={handleLogInClick}>Log in</span>
-                  </p>
-                  <p>
-                    Forgot password?{" "}
-                    <span onClick={forgotPassword}>Click here</span>
                   </p>
                 </form>
               </div>

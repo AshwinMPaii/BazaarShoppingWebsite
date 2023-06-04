@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaShoppingCart, FaShoppingBag, FaTimes } from "react-icons/fa";
 import "./ShoppingCart.css";
-
+import CartItems from "../cart/cartItems";
 const ShoppingCart = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -40,6 +40,9 @@ const ShoppingCart = () => {
                 className="close-icon"
                 onClick={handleCloseButtonClick}
               />
+            </div>
+            <div>
+              < CartItems/>
             </div>
 
             <div className="popup-footer">
