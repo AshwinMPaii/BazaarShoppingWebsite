@@ -3,6 +3,8 @@ import backgroundImageLogin from "../../Assets/Images/backimagelogin.jpg";
 import logo from "../../Assets/Icons/logo.png";
 import React, { useState } from "react";
 import "./signUp.css";
+import ForgotPasswordPopup from "./ForgotPasswordPopup";
+
 
 
 const SignUp = (props) => {
@@ -18,7 +20,7 @@ const SignUp = (props) => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [isSignUp, setIsSignUp] = useState(false);
     // const [errorMessage, setErrorMessage] = useState('');
-
+    const [isForgotPassword, setIsForgotPassword] = useState(false);
 
     const handleCloseModal = () => {
         props.onClose();
@@ -27,6 +29,17 @@ const SignUp = (props) => {
         // setPassword('');
         // setConfirmPassword('');
     };
+    const handleForgotPasswordClick = () => {
+        setIsForgotPassword(true);
+
+    };
+    const handleForgotPasswordSubmit = (email) => {
+        // Handle the form submission with the email
+        console.log("Forgot Password form submitted. Email:", email);
+        // setIsForgotPassword(false);
+        setIsLoginModalOpen(true);
+    };
+
 
     const handleSignUpClick = () => {
         setIsSignUp(true);
@@ -133,7 +146,6 @@ const SignUp = (props) => {
 
     return (
         <>
-
             <div className="modal">
                 <div className="modal-content">
                     <button onClick={handleCloseModal} className="close-button">
@@ -185,6 +197,10 @@ const SignUp = (props) => {
                                     <p>
                                         Don't have an account?{" "}
                                         <span onClick={handleSignUpClick}>Sign up</span>
+                                        <br />
+                                        <span onClick={handleForgotPasswordClick}>
+                                            Forgot Password
+                                        </span>
                                     </p>
                                 </form>
                             </div>
@@ -247,8 +263,14 @@ const SignUp = (props) => {
                     )}
                 </div>
             </div>
+            {isForgotPassword && (
+                <ForgotPasswordPopup
+                    onClose={() => setIsForgotPassword(false)}
+                    onSubmit={handleForgotPasswordSubmit}
+                />
+            )}
         </>
-    )
+    );
 };
 
 export default SignUp;
