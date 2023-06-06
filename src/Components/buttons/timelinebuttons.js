@@ -11,7 +11,7 @@ function Timeline() {
         { id: 1, label: "1. Cart", path: "/time1" },
         { id: 2, label: "2. Details", path: "/time2" },
         { id: 3, label: "3. Payment", path: "/time3" },
-        { id: 4, label: "4. Review", path: "/time5" },
+        { id: 4, label: "4. Orders", path: "/time4" },
     ];
 
     const handleButtonClick = (buttonNumber) => {

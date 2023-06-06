@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import './det.css';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import "./det.css";
+import { Link, useNavigate } from "react-router-dom";
 
-const countries = ['Country A', 'Country B', 'Country C']; // Example list of countries
+const countries = ["Country A", "Country B", "Country C"]; // Example list of countries
 
 const Details = () => {
+  let history = useNavigate();
+
   const [totalAmount, setTotalAmount] = useState(null);
   const [tax, setTax] = useState(null);
   const [subTotal, setSubTotal] = useState(null);
@@ -12,13 +14,15 @@ const Details = () => {
   useEffect(() => {
     const fetchTotalAmount = async () => {
       try {
-        const response = await fetch('http://localhost:8080/carts/totalPrice/1');
+        const response = await fetch(
+          "http://localhost:8080/carts/totalPrice/1"
+        );
         const data = await response.json();
-        setTotalAmount(data['Total Amount']);
-        setTax(data['tax']);
-        setSubTotal(data['Sub-Total']);
+        setTotalAmount(data["Total Amount"]);
+        setTax(data["tax"]);
+        setSubTotal(data["Sub-Total"]);
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
     };
 
@@ -93,6 +97,72 @@ const Details = () => {
         address1: "",
         address2: "",
       });
+    }
+  };
+
+
+  const handleProceedToPayment = async () => {
+    try {
+      // Make API requests to update the billing and shipping addresses
+      await fetch("http://localhost:8080/billing/user/1", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: 1,
+          user: {
+            id: 1,
+            email: "user1@gmail.com",
+            password: "varun",
+            roles: "ROLE_USER",
+            oneTimePassword: null,
+            otpRequestedTime: null,
+            otprequired: false,
+          },
+          fullName: billingAddress.fullName,
+          email: billingAddress.email,
+          addressLine1: billingAddress.address1,
+          addressLine2: billingAddress.address2,
+          phone: billingAddress.phoneNumber,
+          company: billingAddress.company,
+          zipCode: billingAddress.zipCode,
+          country: billingAddress.country,
+        }),
+      });
+
+      await fetch("http://localhost:8080/shipping/user/1", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: 1,
+          user: {
+            id: 1,
+            email: "ismailafrid313@gmail.com",
+            password:
+              "$2a$10$l3fD.ZC57fIFMsY61ZefVuWA1jIZdELrLurxtk007tEXleB.FuPP2",
+            roles: "ROLE_CUSTOMER",
+            oneTimePassword: null,
+            otpRequestedTime: null,
+            otprequired: false,
+          },
+          fullName: shippingAddress.fullName,
+          email: shippingAddress.email,
+          addressLine1: shippingAddress.address1,
+          addressLine2: shippingAddress.address2,
+          phone: shippingAddress.phoneNumber,
+          company: shippingAddress.company,
+          zipCode: shippingAddress.zipCode,
+          country: shippingAddress.country,
+        }),
+      });
+
+      // Redirect to the desired page (time3)
+      history("/time3");
+    } catch (error) {
+      console.error("Error:", error);
     }
   };
 
@@ -198,7 +268,7 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Full Name:"
                 value={billingAddress.fullName}
-                onChange={(e) => handleInputChange(e, "shipping")}
+                onChange={(e) => handleInputChange(e, "billing")}
               />
 
               <input
@@ -207,7 +277,7 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Phone Number"
                 value={billingAddress.phoneNumber}
-                onChange={(e) => handleInputChange(e, "shipping")}
+                onChange={(e) => handleInputChange(e, "billing")}
               />
 
               <input
@@ -216,7 +286,7 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Zip Code"
                 value={billingAddress.zipCode}
-                onChange={(e) => handleInputChange(e, "shipping")}
+                onChange={(e) => handleInputChange(e, "billing")}
               />
 
               <input
@@ -225,7 +295,7 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Address 1"
                 value={billingAddress.address1}
-                onChange={(e) => handleInputChange(e, "shipping")}
+                onChange={(e) => handleInputChange(e, "billing")}
               />
 
             </div>
@@ -236,7 +306,7 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Email Address"
                 value={billingAddress.email}
-                onChange={(e) => handleInputChange(e, "shipping")}
+                onChange={(e) => handleInputChange(e, "billing")}
               />
 
               <input
@@ -245,13 +315,13 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Company"
                 value={billingAddress.company}
-                onChange={(e) => handleInputChange(e, "shipping")}
+                onChange={(e) => handleInputChange(e, "billing")}
               />
               <select
                 name="country"
                 placeholder="Country"
                 value={billingAddress.country}
-                onChange={(e) => handleInputChange(e, "shipping")}
+                onChange={(e) => handleInputChange(e, "billing")}
               >
                 <option value="">Select Country</option>
                 {countries.map((country) => (
@@ -266,7 +336,7 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Address 2"
                 value={billingAddress.address2}
-                onChange={(e) => handleInputChange(e, "shipping")}
+                onChange={(e) => handleInputChange(e, "billing")}
               />
             </div>
           </div>
@@ -278,9 +348,7 @@ const Details = () => {
             </Link>
           </div>
           <div className="b">
-            <Link to='/time3'>
-              <button>Proceed To Payment</button>
-            </Link>
+            <button onClick={handleProceedToPayment}>Proceed To Payment</button>
           </div>
         </div>
       </div>
