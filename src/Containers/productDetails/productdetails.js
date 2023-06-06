@@ -204,7 +204,7 @@ const ProductDetails = () => {
             <div className="add-review">
               {/* <h3>Add a Review</h3>
                 <StarRating onSubmit={handleReviewSubmit} /> */}
-              <RatingComponent />
+              <RatingComponent productId={product.productId}/>
             </div>
           </div>
         )}

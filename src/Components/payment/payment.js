@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./payment.css";
 
 function Payment() {
   const [paymentOption, setPaymentOption] = useState("payment");
+  let history = useNavigate();
 
   const handleOptionChange = (event) => {
     setPaymentOption(event.target.value);
@@ -11,13 +12,35 @@ function Payment() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    alert("Order Placed");
+
+    fetch("http://localhost:8080/orders/placeOrder/1", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        paymentOption: paymentOption,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("Order Placed");
+          history("/");
+        } else {
+          alert("Failed to place order");
+          // history.push("/error");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("An error occurred while placing the order");
+        // history.push("/error");
+      });
   };
 
   return (
     <div className="payment-main">
       <div className="payment-page">
-        {/* <div className="payment-container"> */}
         <div className="payment-options">
           <div className="radio1">
             <label>
@@ -39,7 +62,7 @@ function Payment() {
                   className="cardnumber"
                   placeholder="Card number"
                 />
-                <input type="text" classname="expdate" placeholder="Exp Date" />
+                <input type="text" className="expdate" placeholder="Exp Date" />
                 <div className="form-row">
                   <input
                     type="text"
@@ -83,7 +106,6 @@ function Payment() {
             </label>
           </div>
         </div>
-        {/* </div> */}
         <div className="pay-button-container">
           <Link to="/time2" className="pay-link">
             Back to Checkout Details
@@ -112,9 +134,9 @@ function Payment() {
             <span>-</span>
           </div>
         </div>
-        <div className='pay-summary-total'>
+        <div className="pay-summary-total">
           <label>Total:</label>
-          <span style={{ fontSize: '24px' }}>$140</span>
+          <span style={{ fontSize: "24px" }}>$140</span>
         </div>
       </div>
     </div>

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import "./ReviewForm.css"
-import { Rating, __esModulefrom } from "react-simple-star-rating";
+import "./ReviewForm.css";
+import axios from "axios";
+import { Rating } from "react-simple-star-rating";
 
-const ReviewForm = () => {
+const ReviewForm = ({productId}) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
-
 
   const handleCommentChange = (event) => {
     setComment(event.target.value);
@@ -13,20 +13,29 @@ const ReviewForm = () => {
 
   const handleRating = (rate) => {
     setRating(rate);
-
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    const userId = 1; // Replace with the actual user ID
+    // const productId = 6; // Replace with the actual product ID
 
+    const reviewData = {
+      rating: rating,
+      comment: comment,
+    };
 
-    console.log("Rating:", rating);
-    console.log("Comment:", comment);
-
-    // Reset form fields
-    setRating(0);
-    setComment("");
+    axios
+      .post(`http://localhost:8080/reviews/${userId}/${productId}`, reviewData)
+      .then((response) => {
+        console.log("Review added successfully:", response.data);
+        setRating(0);
+        setComment("");
+      })
+      .catch((error) => {
+        console.error("Error adding review:", error);
+      });
   };
 
   return (
@@ -41,7 +50,7 @@ const ReviewForm = () => {
           transition
           fillColor="orange"
           emptyColor="gray"
-          className="foo" // Will remove the inline style if applied
+          className="foo"
         />
       </div>
       <textarea
@@ -49,7 +58,9 @@ const ReviewForm = () => {
         value={comment}
         onChange={handleCommentChange}
       ></textarea>
-      <button className="review-button" onClick={handleSubmit}>Submit</button>
+      <button className="review-button" onClick={handleSubmit}>
+        Submit
+      </button>
     </div>
   );
 };

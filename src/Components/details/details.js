@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import './det.css';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import "./det.css";
+import { Link, useNavigate} from "react-router-dom";
 
-const countries = ['Country A', 'Country B', 'Country C']; // Example list of countries
+const countries = ["Country A", "Country B", "Country C"]; // Example list of countries
 
 const Details = () => {
+  let history = useNavigate();
+
   const [totalAmount, setTotalAmount] = useState(null);
   const [tax, setTax] = useState(null);
   const [subTotal, setSubTotal] = useState(null);
@@ -12,13 +14,15 @@ const Details = () => {
   useEffect(() => {
     const fetchTotalAmount = async () => {
       try {
-        const response = await fetch('http://localhost:8080/carts/totalPrice/1');
+        const response = await fetch(
+          "http://localhost:8080/carts/totalPrice/1"
+        );
         const data = await response.json();
-        setTotalAmount(data['Total Amount']);
-        setTax(data['tax']);
-        setSubTotal(data['Sub-Total']);
+        setTotalAmount(data["Total Amount"]);
+        setTax(data["tax"]);
+        setSubTotal(data["Sub-Total"]);
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
     };
 
@@ -26,7 +30,7 @@ const Details = () => {
     fetchTotalAmount();
 
     // Poll for total amount every 5 seconds (adjust the interval as needed)
-    const intervalId = setInterval(fetchTotalAmount, 1000);
+    const intervalId = setInterval(fetchTotalAmount, 5000);
 
     return () => {
       clearInterval(intervalId);
@@ -93,6 +97,88 @@ const Details = () => {
         address1: "",
         address2: "",
       });
+    }
+  };
+
+  // const handleAddToCart = async (productId) => {
+  //   try {
+  //     // Make an API request to add the product to the cart
+  //     await fetch(`http://localhost:8080/carts/addToCart/${productId}`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+
+  //     // Redirect to the desired page (time1)
+  //     history("/time1");
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
+
+  const handleProceedToPayment = async () => {
+    try {
+      // Make API requests to update the billing and shipping addresses
+      await fetch("http://localhost:8080/billing/user/1", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: 1,
+          user: {
+            id: 1,
+            email: "user1@gmail.com",
+            password: "varun",
+            roles: "ROLE_USER",
+            oneTimePassword: null,
+            otpRequestedTime: null,
+            otprequired: false,
+          },
+          fullName: shippingAddress.fullName,
+          email: shippingAddress.email,
+          addressLine1: shippingAddress.address1,
+          addressLine2: shippingAddress.address2,
+          phone: shippingAddress.phoneNumber,
+          company: shippingAddress.company,
+          zipCode: shippingAddress.zipCode,
+          country: shippingAddress.country,
+        }),
+      });
+
+      await fetch("http://localhost:8080/shipping/user/1", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: 1,
+          user: {
+            id: 1,
+            email: "ismailafrid313@gmail.com",
+            password:
+              "$2a$10$l3fD.ZC57fIFMsY61ZefVuWA1jIZdELrLurxtk007tEXleB.FuPP2",
+            roles: "ROLE_CUSTOMER",
+            oneTimePassword: null,
+            otpRequestedTime: null,
+            otprequired: false,
+          },
+          fullName: shippingAddress.fullName,
+          email: shippingAddress.email,
+          addressLine1: shippingAddress.address1,
+          addressLine2: shippingAddress.address2,
+          phone: shippingAddress.phoneNumber,
+          company: shippingAddress.company,
+          zipCode: shippingAddress.zipCode,
+          country: shippingAddress.country,
+        }),
+      });
+
+      // Redirect to the desired page (time3)
+      history("/time3");
+    } catch (error) {
+      console.error("Error:", error);
     }
   };
 
@@ -185,11 +271,12 @@ const Details = () => {
         <div className="det-container1">
           <h2>Billing Address</h2>
           <input
-            className='det-container1-check'
+            className="det-container1-check"
             type="checkbox"
             checked={isSameAsShipping}
             onChange={handleCheckboxChange}
-          /><span className='det-container1-check'>Same as Shipping</span>
+          />
+          <span className="det-container1-check">Same as Shipping</span>
           <div className="input-group1">
             <div className="column1">
               <input
@@ -198,7 +285,7 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Full Name:"
                 value={billingAddress.fullName}
-                onChange={(e) => handleInputChange(e, "shipping")}
+                onChange={(e) => handleInputChange(e, "billing")}
               />
 
               <input
@@ -207,7 +294,7 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Phone Number"
                 value={billingAddress.phoneNumber}
-                onChange={(e) => handleInputChange(e, "shipping")}
+                onChange={(e) => handleInputChange(e, "billing")}
               />
 
               <input
@@ -216,7 +303,7 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Zip Code"
                 value={billingAddress.zipCode}
-                onChange={(e) => handleInputChange(e, "shipping")}
+                onChange={(e) => handleInputChange(e, "billing")}
               />
 
               <input
@@ -225,9 +312,8 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Address 1"
                 value={billingAddress.address1}
-                onChange={(e) => handleInputChange(e, "shipping")}
+                onChange={(e) => handleInputChange(e, "billing")}
               />
-
             </div>
             <div className="column2">
               <input
@@ -236,7 +322,7 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Email Address"
                 value={billingAddress.email}
-                onChange={(e) => handleInputChange(e, "shipping")}
+                onChange={(e) => handleInputChange(e, "billing")}
               />
 
               <input
@@ -245,13 +331,13 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Company"
                 value={billingAddress.company}
-                onChange={(e) => handleInputChange(e, "shipping")}
+                onChange={(e) => handleInputChange(e, "billing")}
               />
               <select
                 name="country"
                 placeholder="Country"
                 value={billingAddress.country}
-                onChange={(e) => handleInputChange(e, "shipping")}
+                onChange={(e) => handleInputChange(e, "billing")}
               >
                 <option value="">Select Country</option>
                 {countries.map((country) => (
@@ -266,7 +352,7 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Address 2"
                 value={billingAddress.address2}
-                onChange={(e) => handleInputChange(e, "shipping")}
+                onChange={(e) => handleInputChange(e, "billing")}
               />
             </div>
           </div>
@@ -278,42 +364,27 @@ const Details = () => {
             </Link>
           </div>
           <div className="b">
-            <Link to='/time3'>
-              <button>Proceed To Payment</button>
-            </Link>
+            <button onClick={handleProceedToPayment}>Proceed To Payment</button>
           </div>
         </div>
       </div>
 
       <div className="summary-container">
-        <div className="summary-details">
+        <div className="summary">
+          <h3>Order Summary</h3>
           <div>
-            <label>Subtotal:</label>
-            <span>${subTotal}</span>
+            <span>Sub-Total:</span>
+            <span>{subTotal}</span>
           </div>
           <div>
-            <label>Shipping Tax:</label>
-            <span>${tax}</span>
+            <span>Tax:</span>
+            <span>{tax}</span>
           </div>
           <div>
-            <label>Discount:</label>
-            <span>-</span>
-          </div>
-          <div>
-            <label>Total:</label>
-            <span>${totalAmount}</span>
+            <span>Total Amount:</span>
+            <span>{totalAmount}</span>
           </div>
         </div>
-        <input
-          style={{ width: '93%', display: 'block', margin: 'auto' }}
-          type="text"
-          name="voucher"
-          className="det-input-field"
-          placeholder="voucher"
-          value={billingAddress.voucher}
-          onChange={(e) => handleInputChange(e, "shipping")}
-        />
-        <button className="apply-voucher-button">Apply Voucher</button>
       </div>
     </div>
   );
