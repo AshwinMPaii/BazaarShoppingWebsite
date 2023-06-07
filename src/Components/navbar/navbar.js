@@ -27,7 +27,7 @@ function NavBar(props) {
 
   const handleLogout = () => {
     // Implement your logout functionality here
-clearLocalStorage();
+    clearLocalStorage();
     console.log("Logged out");
   };
 
