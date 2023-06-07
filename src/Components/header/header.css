@@ -1,12 +1,12 @@
 .header1 {
   font-size: 75%;
-  background-color: #191970;
+  background-color: #080837;
   color: aliceblue;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2px;
-  margin: 0;
+  margin: 0;
 }
 
 .left_side {

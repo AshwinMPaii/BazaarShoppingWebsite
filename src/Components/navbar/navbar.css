@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f2f2f2;
+  background-color: #fff;
   padding: 0.5rem;
 }
 .nav-links {
@@ -68,14 +68,20 @@
   font-size: 16px;
   padding: 10px;
 } */
-.dropdown-content a {
+.dropdown-content .category {
   color: #333;
   display: block;
   padding: 0.5rem;
   text-decoration: none;
 }
+/* .dropdown-content a {
+  color: #333;
+  display: block;
+  padding: 0.5rem;
+  text-decoration: none;
+} */
 
-.dropdown-content a:hover {
+.dropdown-content .category:hover {
   background-color: #eee;
 }
 
@@ -94,4 +100,122 @@
 /* Style for the options when hovered */
 .option:hover {
   background-color: #ddd;
+}
+.user-option:hover {
+  background-color: transparent;
+}
+
+/* Add this CSS code to your navbar.css file */
+
+/* Modal styles */
+.modal1 {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal1-content {
+  display: flex;
+  flex-direction: column;
+  background-color: #fefefe;
+  margin: 12% auto;
+  /* align-self: center; */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 300px;
+  align-items: center;
+  /* justify-content: center; */
+  position: relative;
+}
+
+.close111 {
+  color: #aaa;
+  position: absolute;
+  /* float: right; */
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  right: 5px;
+  top: 0;
+}
+.change-pass-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+  height: 185px;
+  width: 80%;
+  max-width: 20rem;
+}
+.change-pass-input {
+  padding: 6px 10px;
+  font-size: 13px;
+  width: 90%;
+  margin-bottom: 6px;
+  border-radius: 4px;
+  border: 1.5px solid #ccc;
+}
+.change-pass-btn {
+  width: 100%;
+  padding: 5px 10px;
+  border: 1px solid crimson;
+  border-radius: 4px;
+  background-color: transparent;
+  color: crimson;
+  font-weight: 600;
+  background-color: #fff;
+}
+.change-pass-btn:hover {
+  background-color: crimson;
+  color: white;
+}
+.close111:hover,
+.close111:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dropdown2 {
+  position: relative;
+  display: inline-block;
+}
+
+.my-dropdown-content {
+  position: absolute;
+  background-color: #fff;
+  display: none;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  width: 150px;
+}
+.dropdown2:hover .my-dropdown-content {
+  display: block;
+  margin-top: 10px;
+}
+.dropdown2 .navbar-dropdown-option {
+  display: block;
+  cursor: pointer;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 4px;
+  border: none;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 300;
+  transition: all 0.1s linear;
+}
+
+.dropdown2 .navbar-dropdown-option:hover {
+  font-weight: bold;
+  background-color: #eeeeeeda;
 }

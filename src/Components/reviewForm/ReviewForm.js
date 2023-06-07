@@ -3,6 +3,31 @@ import "./ReviewForm.css";
 import axios from "axios";
 import { Rating } from "react-simple-star-rating";
 
+const getUserData = () => {
+  const userDataString = localStorage.getItem("userData");
+  if (userDataString) {
+    return JSON.parse(userDataString);
+  }
+  return null;
+};
+const getToken = () => {
+  const userData = getUserData();
+  if (userData) {
+    return userData.token;
+  }
+  return null;
+};
+const getId = () => {
+  const userData = getUserData();
+  if (userData) {
+    return userData.id;
+  }
+  return null;
+};
+const token = getToken();
+console.log("cart" + token);
+const id = getId();
+
 const ReviewForm = ({productId}) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
@@ -18,7 +43,7 @@ const ReviewForm = ({productId}) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const userId = 1; // Replace with the actual user ID
+    const userId = getId(); // Replace with the actual user ID
     // const productId = 6; // Replace with the actual product ID
 
     const reviewData = {
@@ -26,17 +51,32 @@ const ReviewForm = ({productId}) => {
       comment: comment,
     };
 
-    axios
-      .post(`http://localhost:8080/reviews/${userId}/${productId}`, reviewData)
+    const token = getToken(); // Get the latest token
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+
+    fetch(`http://localhost:8080/reviews/${userId}/${productId}`, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(reviewData),
+    })
       .then((response) => {
-        console.log("Review added successfully:", response.data);
-        setRating(0);
-        setComment("");
+        if (response.ok) {
+          console.log("Review added successfully");
+          setRating(0);
+          setComment("");
+        } else {
+          throw new Error("Failed to add review");
+        }
       })
       .catch((error) => {
         console.error("Error adding review:", error);
       });
   };
+
 
   return (
     <div>

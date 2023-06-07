@@ -1,17 +1,56 @@
 import { useEffect, useState } from "react";
 import "./orderList.css";
 
+const getUserData = () => {
+  const userDataString = localStorage.getItem("userData");
+  if (userDataString) {
+    return JSON.parse(userDataString);
+  }
+  return null;
+};
+const getToken = () => {
+  const userData = getUserData();
+  if (userData) {
+    return userData.token;
+  }
+  return null;
+};
+const getId = () => {
+  const userData = getUserData();
+  if (userData) {
+    return userData.id;
+  }
+  return null;
+};
+const token = getToken();
+console.log("cart" + token);
+const id = getId();
+
 function OrderList() {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:8080/orders/1")
-            .then((response) => response.json())
-            .then((data) => setOrders(data))
-            .catch((error) => {
-                console.error(error);
-            });
+      const userId = getId(); // Replace with the actual user ID
+      const token = getToken(); // Get the latest token
+
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      fetch(`http://localhost:8080/orders/${userId}`, { headers })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error("Request failed");
+          }
+        })
+        .then((data) => setOrders(data))
+        .catch((error) => {
+          console.error(error);
+        });
     }, []);
+
 
     return (
         <div className="order-list">
