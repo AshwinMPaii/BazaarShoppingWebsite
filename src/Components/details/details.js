@@ -102,67 +102,74 @@ const Details = () => {
 
 
   const handleProceedToPayment = async () => {
-    try {
-      // Make API requests to update the billing and shipping addresses
-      await fetch("http://localhost:8080/billing/user/1", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: 1,
-          user: {
-            id: 1,
-            email: "user1@gmail.com",
-            password: "varun",
-            roles: "ROLE_USER",
-            oneTimePassword: null,
-            otpRequestedTime: null,
-            otprequired: false,
-          },
-          fullName: billingAddress.fullName,
-          email: billingAddress.email,
-          addressLine1: billingAddress.address1,
-          addressLine2: billingAddress.address2,
-          phone: billingAddress.phoneNumber,
-          company: billingAddress.company,
-          zipCode: billingAddress.zipCode,
-          country: billingAddress.country,
-        }),
-      });
+    if (!(billingAddress.fullName === '' || billingAddress.email === '' || billingAddress.address1 === '' || billingAddress.address2 === '' || billingAddress.phoneNumber === '' || billingAddress.company === '' ||
+      billingAddress.zipCode === '' || billingAddress.country === '' || shippingAddress.fullName === '' || shippingAddress.email === '' || shippingAddress.address1 === '' || shippingAddress.address2 === '' || shippingAddress.phoneNumber === '' || shippingAddress.company === '' || shippingAddress.zipCode === '' || shippingAddress.country === '')) {
 
-      await fetch("http://localhost:8080/shipping/user/1", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: 1,
-          user: {
-            id: 1,
-            email: "ismailafrid313@gmail.com",
-            password:
-              "$2a$10$l3fD.ZC57fIFMsY61ZefVuWA1jIZdELrLurxtk007tEXleB.FuPP2",
-            roles: "ROLE_CUSTOMER",
-            oneTimePassword: null,
-            otpRequestedTime: null,
-            otprequired: false,
+      try {
+        // Make API requests to update the billing and shipping addresses
+        await fetch("http://localhost:8080/billing/user/1", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-          fullName: shippingAddress.fullName,
-          email: shippingAddress.email,
-          addressLine1: shippingAddress.address1,
-          addressLine2: shippingAddress.address2,
-          phone: shippingAddress.phoneNumber,
-          company: shippingAddress.company,
-          zipCode: shippingAddress.zipCode,
-          country: shippingAddress.country,
-        }),
-      });
+          body: JSON.stringify({
+            id: 1,
+            user: {
+              id: 1,
+              email: "user1@gmail.com",
+              password: "varun",
+              roles: "ROLE_USER",
+              oneTimePassword: null,
+              otpRequestedTime: null,
+              otprequired: false,
+            },
+            fullName: billingAddress.fullName,
+            email: billingAddress.email,
+            addressLine1: billingAddress.address1,
+            addressLine2: billingAddress.address2,
+            phone: billingAddress.phoneNumber,
+            company: billingAddress.company,
+            zipCode: billingAddress.zipCode,
+            country: billingAddress.country,
+          }),
+        });
 
-      // Redirect to the desired page (time3)
-      history("/time3");
-    } catch (error) {
-      console.error("Error:", error);
+        await fetch("http://localhost:8080/shipping/user/1", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: 1,
+            user: {
+              id: 1,
+              email: "ismailafrid313@gmail.com",
+              password:
+                "$2a$10$l3fD.ZC57fIFMsY61ZefVuWA1jIZdELrLurxtk007tEXleB.FuPP2",
+              roles: "ROLE_CUSTOMER",
+              oneTimePassword: null,
+              otpRequestedTime: null,
+              otprequired: false,
+            },
+            fullName: shippingAddress.fullName,
+            email: shippingAddress.email,
+            addressLine1: shippingAddress.address1,
+            addressLine2: shippingAddress.address2,
+            phone: shippingAddress.phoneNumber,
+            company: shippingAddress.company,
+            zipCode: shippingAddress.zipCode,
+            country: shippingAddress.country,
+          }),
+        });
+
+        // Redirect to the desired page (time3)
+        history("/time3");
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+    else {
+      alert("Please fill all fields")
     }
   };
 
@@ -179,26 +186,20 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Full Name:"
                 value={shippingAddress.fullName}
+                required
                 onChange={(e) => handleInputChange(e, "shipping")}
               />
 
               <input
-                type="email"
-                name="email"
-                className="det-input-field"
-                placeholder="Email"
-                value={shippingAddress.email}
-                onChange={(e) => handleInputChange(e, "shipping")}
-              />
-
-              <input
-                type="text"
+                type="number"
                 name="phoneNumber"
                 className="det-input-field"
                 placeholder="Phone Number"
                 value={shippingAddress.phoneNumber}
+                required
                 onChange={(e) => handleInputChange(e, "shipping")}
               />
+
 
               <input
                 type="text"
@@ -206,6 +207,16 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Zip Code"
                 value={shippingAddress.zipCode}
+                required
+                onChange={(e) => handleInputChange(e, "shipping")}
+              />
+              <input
+                type="tex"
+                name="address1"
+                className="det-input-field"
+                placeholder="Address 1"
+                value={shippingAddress.address1}
+                required
                 onChange={(e) => handleInputChange(e, "shipping")}
               />
             </div>
@@ -216,6 +227,7 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Email Address"
                 value={shippingAddress.email}
+                required
                 onChange={(e) => handleInputChange(e, "shipping")}
               />
 
@@ -225,12 +237,14 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Company"
                 value={shippingAddress.company}
+                required
                 onChange={(e) => handleInputChange(e, "shipping")}
               />
               <select
                 name="country"
                 placeholder="Country"
                 value={shippingAddress.country}
+                required
                 onChange={(e) => handleInputChange(e, "shipping")}
               >
                 <option value="">Select Country</option>
@@ -246,6 +260,7 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Address 2"
                 value={shippingAddress.address2}
+                required
                 onChange={(e) => handleInputChange(e, "shipping")}
               />
             </div>
@@ -268,15 +283,17 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Full Name:"
                 value={billingAddress.fullName}
+                required
                 onChange={(e) => handleInputChange(e, "billing")}
               />
 
               <input
-                type="text"
+                type="number"
                 name="phoneNumber"
                 className="det-input-field"
                 placeholder="Phone Number"
                 value={billingAddress.phoneNumber}
+                required
                 onChange={(e) => handleInputChange(e, "billing")}
               />
 
@@ -286,6 +303,7 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Zip Code"
                 value={billingAddress.zipCode}
+                required
                 onChange={(e) => handleInputChange(e, "billing")}
               />
 
@@ -295,6 +313,7 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Address 1"
                 value={billingAddress.address1}
+                required
                 onChange={(e) => handleInputChange(e, "billing")}
               />
 
@@ -306,6 +325,7 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Email Address"
                 value={billingAddress.email}
+                required
                 onChange={(e) => handleInputChange(e, "billing")}
               />
 
@@ -315,12 +335,14 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Company"
                 value={billingAddress.company}
+                required
                 onChange={(e) => handleInputChange(e, "billing")}
               />
               <select
                 name="country"
                 placeholder="Country"
                 value={billingAddress.country}
+                required
                 onChange={(e) => handleInputChange(e, "billing")}
               >
                 <option value="">Select Country</option>
@@ -336,6 +358,7 @@ const Details = () => {
                 className="det-input-field"
                 placeholder="Address 2"
                 value={billingAddress.address2}
+                required
                 onChange={(e) => handleInputChange(e, "billing")}
               />
             </div>
