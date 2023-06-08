@@ -2,11 +2,8 @@ import React, { useState } from "react";
 import { FaShoppingCart, FaShoppingBag, FaTimes } from "react-icons/fa";
 import "./ShoppingCart.css";
 import CartItems from "../cart/cartItems";
-<<<<<<< HEAD
-=======
 import { Link } from 'react-router-dom';
 
->>>>>>> 41e2f0a138db9c078664f36fa73b4c53667f3f98
 const ShoppingCart = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -46,13 +43,8 @@ const ShoppingCart = () => {
                 onClick={handleCloseButtonClick}
               />
             </div>
-<<<<<<< HEAD
-            <div>
-              < CartItems/>
-=======
             <div className="pop-up-middle">
               <CartItems />
->>>>>>> 41e2f0a138db9c078664f36fa73b4c53667f3f98
             </div>
 
             <div className="popup-footer">

@@ -1,11 +1,36 @@
 import React, { useState } from "react";
-import "./ReviewForm.css"
-import { Rating, __esModulefrom } from "react-simple-star-rating";
+import "./ReviewForm.css";
+import axios from "axios";
+import { Rating } from "react-simple-star-rating";
 
-const ReviewForm = () => {
+const getUserData = () => {
+  const userDataString = localStorage.getItem("userData");
+  if (userDataString) {
+    return JSON.parse(userDataString);
+  }
+  return null;
+};
+const getToken = () => {
+  const userData = getUserData();
+  if (userData) {
+    return userData.token;
+  }
+  return null;
+};
+const getId = () => {
+  const userData = getUserData();
+  if (userData) {
+    return userData.id;
+  }
+  return null;
+};
+const token = getToken();
+console.log("cart" + token);
+const id = getId();
+
+const ReviewForm = ({productId}) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
-
 
   const handleCommentChange = (event) => {
     setComment(event.target.value);
@@ -13,21 +38,45 @@ const ReviewForm = () => {
 
   const handleRating = (rate) => {
     setRating(rate);
-
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    const userId = getId(); // Replace with the actual user ID
+    // const productId = 6; // Replace with the actual product ID
 
+    const reviewData = {
+      rating: rating,
+      comment: comment,
+    };
 
-    console.log("Rating:", rating);
-    console.log("Comment:", comment);
+    const token = getToken(); // Get the latest token
 
-    // Reset form fields
-    setRating(0);
-    setComment("");
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+
+    fetch(`http://localhost:8080/reviews/${userId}/${productId}`, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(reviewData),
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("Review added successfully");
+          setRating(0);
+          setComment("");
+        } else {
+          throw new Error("Failed to add review");
+        }
+      })
+      .catch((error) => {
+        console.error("Error adding review:", error);
+      });
   };
+
 
   return (
     <div>
@@ -41,7 +90,7 @@ const ReviewForm = () => {
           transition
           fillColor="orange"
           emptyColor="gray"
-          className="foo" // Will remove the inline style if applied
+          className="foo"
         />
       </div>
       <textarea
@@ -49,7 +98,9 @@ const ReviewForm = () => {
         value={comment}
         onChange={handleCommentChange}
       ></textarea>
-      <button className="review-button" onClick={handleSubmit}>Submit</button>
+      <button className="review-button" onClick={handleSubmit}>
+        Submit
+      </button>
     </div>
   );
 };

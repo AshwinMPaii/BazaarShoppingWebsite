@@ -6,6 +6,30 @@ import { Link } from "react-router-dom";
 import CartItems from "./cartItems";
 //import { itemsData } from "./cartItems";
 //import { totalCost } from "./cartItems";
+const getUserData = () => {
+  const userDataString = localStorage.getItem("userData");
+  if (userDataString) {
+    return JSON.parse(userDataString);
+  }
+  return null;
+};
+const getToken = () => {
+  const userData = getUserData();
+  if (userData) {
+    return userData.token;
+  }
+  return null;
+};
+const getId = () => {
+  const userData = getUserData();
+  if (userData) {
+    return userData.id;
+  }
+  return null;
+};
+const token = getToken();
+console.log("cart" + token);
+const id = getId();
 
 
 const Cart = () => {
@@ -44,13 +68,48 @@ const Cart = () => {
   // const handleShippingDetailsChange = (e) => {
   //   setShippingDetails(e.target.value);
   // };
-  useEffect(() => {
-    const fetchTotalAmount = async () => {
-      try {
-        const response = await fetch('http://localhost:8080/carts/totalPrice/1');
-        const data = await response.json();
-        setTotalAmount(data['Total Amount']);
-      } catch (error) {
+  // useEffect(() => {
+  //   const fetchTotalAmount = async () => {
+  //     try {
+  //       const response = await fetch('http://localhost:8080/carts/totalPrice/1');
+  //       const data = await response.json();
+  //       setTotalAmount(data['Total Amount']);
+  //     } catch (error) {
+  //       console.error('Error:', error);
+  //     }
+  //   };
+
+  //   // Fetch total amount initially
+  //   fetchTotalAmount();
+
+  //   // Poll for total amount every 5 seconds (adjust the interval as needed)
+  //   const intervalId = setInterval(fetchTotalAmount, 1000);
+
+  //   return () => {
+  //     clearInterval(intervalId);
+  //   };
+  // }, []);
+
+ useEffect(() => {
+ const fetchTotalAmount = async () => {
+   try {
+     const token = getToken(); // Get the latest token
+     const id = getId();
+
+     const headers = {
+       Authorization: `Bearer ${token}`,
+     };
+
+     const url = `http://localhost:8080/carts/totalPrice/${id}`;
+     const response = await fetch(url, { headers });
+     console.log("cart" + token);
+     if (response.ok) {
+       const data = await response.json();
+       setTotalAmount(data['Total Amount']);}
+      else {
+            throw new Error("Request failed");
+          }
+        } catch (error) {
         console.error('Error:', error);
       }
     };
@@ -65,7 +124,6 @@ const Cart = () => {
       clearInterval(intervalId);
     };
   }, []);
-
 
 
 

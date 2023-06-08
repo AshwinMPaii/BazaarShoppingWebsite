@@ -18,6 +18,31 @@ import g1 from "../../Assets/Images/10.jpg";
 import g2 from "../../Assets/Images/11.jpg";
 import g3 from "../../Assets/Images/12.jpg";
 
+const getUserData = () => {
+  const userDataString = localStorage.getItem("userData");
+  if (userDataString) {
+    return JSON.parse(userDataString);
+  }
+  return null;
+};
+const getToken = () => {
+  const userData = getUserData();
+  if (userData) {
+    return userData.token;
+  }
+  return null;
+};
+const getId = () => {
+  const userData = getUserData();
+  if (userData) {
+    return userData.id;
+  }
+  return null;
+};
+const token = getToken();
+console.log("cart" + token);
+const Userid = getId();
+
 const ProductDetails = () => {
   let history = useNavigate();
   const { id } = useParams();
@@ -44,7 +69,7 @@ const ProductDetails = () => {
 
   const [product, setProduct] = useState(null);
   const [reviews, setReviews] = useState([]);
-
+  
   useEffect(() => {
     Promise.all([
       fetch(`http://localhost:8080/products/${id}`),
@@ -119,18 +144,29 @@ const ProductDetails = () => {
     console.log("Comment:", comment);
   };
 
+  
+ const addProductToCart = async (productId) => {
+   try {
+     const token = getToken(); // Get the latest token
+     const Userid = getId();
 
-  const addProductToCart = async (productId) => {
-    try {
-      const response = await axios.post(`http://localhost:8080/carts/1/${productId}/1`);
-      console.log('Response:', response.data);
-      history('/time1');
+     const headers = {
+       Authorization: `Bearer ${token}`,
+     };
 
-    } catch (error) {
-      console.error('Error:', error);
-      // Handle the error or display an error message
-    }
-  };
+     const response = await axios.post(
+       `http://localhost:8080/carts/${Userid}/${productId}/1`,
+       {},
+       { headers }
+     );
+
+     console.log("Response:", response.data);
+     history("/time1");
+   } catch (error) {
+     console.error("Error:", error);
+     // Handle the error or display an error message
+   }
+ };
 
   return (
     <div className="product-details">
@@ -208,7 +244,7 @@ const ProductDetails = () => {
             <div className="add-review">
               {/* <h3>Add a Review</h3>
                 <StarRating onSubmit={handleReviewSubmit} /> */}
-              <RatingComponent />
+              <RatingComponent productId={product.productId}/>
             </div>
           </div>
         )}

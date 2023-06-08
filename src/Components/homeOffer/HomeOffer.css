@@ -1,4 +1,4 @@
-.btn {
+.home-btn {
   text-transform: uppercase;
   background: red;
   color: white;
@@ -11,6 +11,9 @@
   cursor: pointer;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
+}
+.home-btn:hover {
+  transform: scale(1.1);
 }
 .homeOfferDescription {
   align-items: center;
