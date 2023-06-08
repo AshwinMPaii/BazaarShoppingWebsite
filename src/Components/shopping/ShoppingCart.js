@@ -1,11 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaShoppingCart, FaShoppingBag, FaTimes } from "react-icons/fa";
 import "./ShoppingCart.css";
 import CartItems from "../cart/cartItems";
 import { Link } from 'react-router-dom';
 
+const getUserData = () => {
+  const userDataString = localStorage.getItem("userData");
+  if (userDataString) {
+    return JSON.parse(userDataString);
+  }
+  return null;
+};
+const getToken = () => {
+  const userData = getUserData();
+  if (userData) {
+    return userData.token;
+  }
+  return null;
+};
+const getId = () => {
+  const userData = getUserData();
+  if (userData) {
+    return userData.id;
+  }
+  return null;
+};
+const token = getToken();
+console.log("cart" + token);
+const id = getId();
+
+
 const ShoppingCart = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [sizeCart, setSizeCart] = useState(null);
 
   const handleCartButtonClick = () => {
     setIsPopupOpen(!isPopupOpen);
@@ -22,6 +49,33 @@ const ShoppingCart = () => {
   const handleCloseButtonClick = () => {
     setIsPopupOpen(false);
   };
+  useEffect(() => {
+    const fetchCartSize = async () => {
+      try {
+        const token = getToken();
+        const id = getId();
+
+        const headers = {
+          Authorization: `Bearer ${token}`,
+        };
+
+        const url = `http://localhost:8080/carts/getSizeOfCart/${id}`;
+        const response = await fetch(url, { headers });
+
+        if (response.ok) {
+          const size = await response.json();
+          setSizeCart(size);
+          //  alert(sizeCart);
+        } else {
+          throw new Error("Request failed");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchCartSize();
+  }, [token]);
 
   return (
     <>
@@ -36,7 +90,7 @@ const ShoppingCart = () => {
           <div className="shopping-cart-popup">
             <div className="popup-header">
               <h3>
-                <FaShoppingBag className="bag-icon" />0 items
+                <FaShoppingBag className="bag-icon" />{sizeCart} items
               </h3>
               <FaTimes
                 className="close-icon"

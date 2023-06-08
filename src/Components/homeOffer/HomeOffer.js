@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './HomeOffer.css';
+import { Link } from 'react-router-dom';
 import shoeImg1 from '../../Assets/Images/shoepic.PNG';
 import shoeImg2 from '../../Assets/Images/shoe2.png';
 
@@ -26,9 +27,11 @@ function HomeOffer() {
                             Buy All the latest trendy shoes you want at great a price
                             which was never offered before!!
                         </p>
-                        <button type="button" className="btn">
-                            Shop Now
-                        </button>
+                        <Link to='/productlist/3'>
+                            <button type="button" className="home-btn">
+                                Shop Now
+                            </button>
+                        </Link>
                     </div>
                 </div>
                 <div className="homeOfferImage" style={{ display: 'flex', width: '50%' }}>
