@@ -47,7 +47,24 @@ const ProductDetails = () => {
   let history = useNavigate();
   const { id } = useParams();
 
-  const [showDescription, setShowDescription] = useState(true);
+  const [product, setProduct] = useState(null);
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    Promise.all([
+      fetch(`http://localhost:8080/products/${id}`),
+      fetch(`http://localhost:8080/reviews/product/${id}`),
+    ])
+      .then(([productResponse, reviewsResponse]) =>
+        Promise.all([productResponse.json(), reviewsResponse.json()])
+      )
+      .then(([productData, reviewsData]) => {
+        setProduct({ ...productData, reviews: reviewsData });
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, [id]);
 
 
   const [product, setProduct] = useState(null);
@@ -110,7 +127,7 @@ const ProductDetails = () => {
   // const product = products.find((product) => product.id === parseInt(id));
 
   if (!product) {
-    return <div>Product not found</div>;
+    return <div>Loading product details...</div>;
   }
 
   const toggleDescription = () => {
@@ -175,19 +192,6 @@ const ProductDetails = () => {
             </span>
 
             <span>({product.reviews.length})</span>
-          </div>
-          <div>OPTIONS</div>
-          <div className="product-actions">
-            <button>Option 1</button>
-            <button>Option 2</button>
-            <button>Option 3</button>
-            <button>Option 4</button>
-          </div>
-          <div>TYPES</div>
-          <div className="product-actions">
-            <button>Type 1</button>
-            <button>Type 2</button>
-            <button>Type 3</button>
           </div>
           <p className="product-price">US${product.price}</p>
           <p>{product.stock !== 0 ? "IN STOCK" : "OUT OF STOCK"}</p>

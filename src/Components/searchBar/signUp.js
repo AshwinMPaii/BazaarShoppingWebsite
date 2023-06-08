@@ -78,7 +78,7 @@ const SignUp = (props) => {
               response.text().then((data) => {
                 console.log("SignUp successful. Response:", data);
                 alert("SignUp successful");
-                 setIsLoginModalOpen(true);
+                setIsLoginModalOpen(true);
               });
             } else {
               // Login failed, handle accordingly

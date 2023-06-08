@@ -217,5 +217,3 @@ const CartItems = () => {
     </div>
   )
 }
-
-export default CartItems
